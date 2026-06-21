@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>万博体育 · 运动体验引导页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #f1f3f5;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 24px 0 0;
+    }
+
+    .layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== 杂志式 hero 横幅 ===== */
+    .hero {
+      background: linear-gradient(145deg, #f7f9fb 0%, #e9eef3 100%);
+      border-radius: 32px 32px 28px 28px;
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05), 0 6px 8px -4px rgba(0, 0, 0, 0.03);
+      padding: 56px 48px 48px;
+      margin-bottom: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(180, 200, 215, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: #dce3e9;
+      color: #2c3e4f;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      padding: 4px 16px;
+      border-radius: 40px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      border: 1px solid #cdd7e0;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 550;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #0b1a2a;
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      color: #3a5f7a;
+      font-weight: 620;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: #2d4055;
+      max-width: 720px;
+      margin-bottom: 24px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 8px 0;
+      backdrop-filter: blur(1px);
+    }
+
+    .hero .meta-note {
+      display: flex;
+      gap: 28px;
+      font-size: 0.875rem;
+      color: #546e7a;
+      border-top: 1px solid rgba(130, 150, 170, 0.2);
+      padding-top: 20px;
+      margin-top: 6px;
+    }
+
+    /* ===== 卡片网格 ===== */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e2e8ee;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 28px -8px rgba(20, 40, 60, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 530;
+      letter-spacing: -0.01em;
+      color: #1a2e3f;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2::before {
+      content: '◆';
+      font-size: 0.9rem;
+      color: #6a8599;
+      opacity: 0.6;
+    }
+
+    .card p {
+      color: #2c4053;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .card .sm-footnote {
+      font-size: 0.85rem;
+      color: #647887;
+      border-left: 3px solid #d0dbe6;
+      padding-left: 16px;
+      margin-top: 18px;
+      background: #f7fafd;
+      padding: 12px 20px;
+      border-radius: 10px;
+    }
+
+    /* 特点列表 —— 紧凑型 */
+    .feature-badge {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 28px;
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+    .feature-badge span {
+      background: #eef2f6;
+      padding: 6px 16px 6px 14px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      color: #1f3a4b;
+      border: 1px solid #dae1e9;
+      display: inline-flex;
+      align-items: center;
+    }
+    .feature-badge span::before {
+      content: '·';
+      font-weight: 700;
+      margin-right: 8px;
+      color: #4b6f88;
+    }
+
+    /* ===== 场景双栏 ===== */
+    .scenario-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .scenario-item {
+      background: white;
+      border: 1px solid #e0e7ed;
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .scenario-item h3 {
+      font-size: 1.1rem;
+      font-weight: 520;
+      color: #20374a;
+      margin-bottom: 8px;
+    }
+
+    .scenario-item p {
+      font-size: 0.92rem;
+      color: #33495e;
+    }
+
+    /* ===== FAQ 摘要 ===== */
+    .faq-abstract {
+      background: #f8faff;
+      border-radius: 28px;
+      padding: 40px 40px 36px;
+      margin-bottom: 48px;
+      border: 1px solid #dae2ea;
+    }
+
+    .faq-abstract h2 {
+      font-size: 1.3rem;
+      font-weight: 540;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+      color: #142c3b;
+    }
+
+    .faq-item {
+      margin-bottom: 16px;
+    }
+    .faq-item strong {
+      display: inline-block;
+      font-weight: 550;
+      color: #1b3141;
+      margin-bottom: 2px;
+    }
+    .faq-item p {
+      margin-left: 0;
+      color: #365067;
+      font-size: 0.92rem;
+    }
+
+    /* ===== 页尾访问提示 ===== */
+    .site-footer {
+      background: #e9eef3;
+      border-radius: 28px 28px 0 0;
+      padding: 32px 44px 36px;
+      border: 1px solid #d7dfe7;
+      border-bottom: 0;
+      margin-top: 24px;
+    }
+
+    .footer-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px 30px;
+    }
+
+    .site-footer p {
+      color: #1b3141;
+      font-size: 0.95rem;
+    }
+
+    .site-footer .cta-sentence {
+      background: white;
+      border: 1px solid #cbd6e1;
+      border-radius: 80px;
+      padding: 8px 24px 8px 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      font-size: 0.95rem;
+    }
+
+    .site-footer a {
+      color: #1a3b52;
+      text-decoration: none;
+      font-weight: 520;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .site-footer a:hover {
+      border-bottom-color: #1a3b52;
+    }
+
+    .footer-meta {
+      font-size: 0.8rem;
+      color: #5b7489;
+      margin-top: 16px;
+      border-top: 1px solid #d0dbe6;
+      padding-top: 18px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 820px) {
+      .hero { padding: 40px 28px 36px; }
+      .hero h1 { font-size: 2.1rem; }
+      .hero .meta-note { flex-direction: column; gap: 6px; }
+      .card { padding: 28px 24px; }
+      .scenario-split { grid-template-columns: 1fr; }
+      .faq-abstract { padding: 28px 24px; }
+      .site-footer { padding: 28px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .layout { padding: 0 14px; }
+      .hero h1 { font-size: 1.7rem; }
+      .card h2 { font-size: 1.2rem; }
+      .feature-badge span { font-size: 0.75rem; padding: 4px 12px; }
+      .footer-flex { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- hero 横幅 -->
+  <header class="hero">
+    <div class="hero-label">SPORTS IDENTIFICATION · 快速定位</div>
+    <h1>从名称到用途：<span>万博体育</span> 是何种服务平台</h1>
+    <p>面对一个运动类品牌，如何一秒判断其核心定位？通过名称、内容结构和常见使用场景，多数访客可在十秒内建立初步认知。本文从信息密度出发，梳理万博体育的定位要素。</p>
+    <div class="meta-note">
+      <span>📌 切入角度 · 识别框架</span>
+      <span>📋 适用人群 · 新访客 / 信息评估者</span>
+    </div>
+  </header>
+
+  <!-- 三段自然介绍 · 卡片式 -->
+  <div class="card-grid">
+
+    <div class="card">
+      <h2>品牌名称与功能指向</h2>
+      <p>「万博体育」四个字直接透露出两个关键词：<strong>万博</strong>（广博、综合）与<strong>体育</strong>（运动、赛事、健身）。从命名习惯来看，这类结构通常指向一个整合型的运动相关平台，包含但不限于赛事资讯、运动社区或服务聚合。名称本身即是一种功能声明，而非抽象符号。</p>
+      <div class="feature-badge">
+        <span>名称语义透明</span>
+        <span>直接指向运动圈层</span>
+        <span>非垂直细分品牌</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>内容生态与用户场景</h2>
+      <p>根据名称延伸及同类平台的常见形态，万博体育很可能围绕以下维度搭建内容：运动项目介绍、赛事动态、训练方法或装备参考。用户场景则对应为——查找运动资料、跟随赛事节奏、以及浏览相关讨论。识别一个平台最快的方法，是观察其是否提供「信息流 + 互动环节」的组合。</p>
+      <div class="sm-footnote">
+        ◇ 信息提示：任何运动类平台的具体服务边界，均需以实际页面为准。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>识别路径：从名称到验证</h2>
+      <p>当用户输入或看到「万博体育」时，建议先观察首页布局的骨架：导航分类、推荐内容、以及社区元素（如有）。名称中的“万博”暗示广度，可能覆盖多种运动类型而非单一项目。若要确认具体功能，最直接的方式是浏览其核心页面，注意页面是否提供清晰的分类入口。记住：一个成熟的运动平台，通常会引导用户用最短路径获得信息。</p>
+    </div>
+  </div>
+
+  <!-- 场景双栏 杂志式模块（差异化） -->
+  <div class="scenario-split">
+    <div class="scenario-item">
+      <h3>🏃 日常浏览场景</h3>
+      <p>打开页面即可看到聚合的运动话题或推荐内容；适合快速了解当前热门运动资讯、训练贴士，不需要注册即可消费信息。</p>
+    </div>
+    <div class="scenario-item">
+      <h3>📊 需求明确场景</h3>
+      <p>用户带有特定目标（如查询某赛事规则、寻找运动分类），此时清晰的导航栏和标签体系是关键。万博体育若提供分类筛选，将有效缩短查找路径。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要（非完整FAQ，仅显示摘要风格） -->
+  <div class="faq-abstract">
+    <h2>❓ 常见判断点 · 摘要</h2>
+    <div class="faq-item">
+      <strong>万博体育是单项目还是综合平台？</strong>
+      <p>从名称“万博”推断，大概率覆盖多种运动领域，但具体分类需查看实际页面结构。</p>
+    </div>
+    <div class="faq-item">
+      <strong>是否需要下载或付费？</strong>
+      <p>多数信息类平台以免费浏览为主；增值服务视具体运营策略而定，建议直接参考官网说明。</p>
+    </div>
+    <div class="faq-item">
+      <strong>如何判断内容是否适合自己？</strong>
+      <p>浏览首页推荐的标题和摘要，匹配自己的运动兴趣。专业度和风格通常通过几篇文章就能感知。</p>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示 -->
+  <footer class="site-footer">
+    <div class="footer-flex">
+      <p class="cta-sentence">
+        <span>🔗</span> 若想直接查看平台本身，可前往 <a href="https://page-wanbosports.com">万博体育</a> 页面，自行判断其内容结构与服务方向。
+      </p>
+      <p style="font-size:0.9rem; color:#2d4b61;">
+        信息密度优先 · 识别先行
+      </p>
+    </div>
+    <div class="footer-meta">
+      <span>杂志专题式介绍 · 仅供识别参考</span>
+      <span>实际服务以官方页面为准</span>
+      <span>页面版本 · 2412</span>
+    </div>
+  </footer>
+
+</div>
+<!-- layout end -->
+</body>
+</html>
